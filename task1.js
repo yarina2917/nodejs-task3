@@ -1,7 +1,5 @@
 const timer = require('./timer');
-
 const testArray = [];
-
 
 // 5) myPush
 
@@ -18,7 +16,6 @@ for (let i = 0; i <= 1000; i++) {
     testArray.myPush(i);
 }
 timer.timeEnd('myPush', 'wrapper');
-
 
 // 1) myForEach
 
@@ -51,7 +48,6 @@ timer.time('myMap', 'wrapper');
 let mapArr = testArray.myMap(el => el * 2);
 timer.timeEnd('myMap', 'wrapper');
 
-
 // 3) mySort
 
 Array.prototype.mySort = function (compareFunction) {
@@ -73,7 +69,6 @@ timer.time('mySort', 'wrapper');
 testArray.mySort((a, b) => a - b);
 timer.timeEnd('mySort', 'wrapper');
 
-
 // 4) myFilter
 
 Array.prototype.myFilter = function (callback, thisArg) {
@@ -90,6 +85,5 @@ Array.prototype.myFilter = function (callback, thisArg) {
 timer.time('myFilter', 'wrapper');
 let filterArr = testArray.myFilter(el => el > 555);
 timer.timeEnd('myFilter', 'wrapper');
-
 
 timer.logAll();
