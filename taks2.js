@@ -3,28 +3,27 @@ function calculateWater (arr) {
     let maxValue = Math.max(...arr);
 
     let leftPosition = arr.indexOf(maxValue);
-    let tempLeftArr = arr.slice(0, leftPosition);
+    let leftArr = arr.slice(0, leftPosition);
 
     let rightPosition = arr.indexOf(maxValue);
-    let tempRightArr = arr.slice(rightPosition + 1);
+    let rightArr = arr.slice(rightPosition + 1);
 
-
-    while (tempLeftArr.length > 1) {
+    while (leftArr.length > 1) {
         // find max value and it index
-        leftPosition = tempLeftArr.indexOf(Math.max(...tempLeftArr));
+        leftPosition = leftArr.indexOf(Math.max(...leftArr));
         // copy part of array, from new max to end to get sum of difference
-        result = tempLeftArr.slice(leftPosition + 1).reduce((sum, current) => sum + (tempLeftArr[leftPosition] - current), result);
+        result = leftArr.slice(leftPosition + 1).reduce((sum, current) => sum + (leftArr[leftPosition] - current), result);
         // remove elements from max value to end
-        tempLeftArr.splice(leftPosition);
+        leftArr.splice(leftPosition);
     }
 
-    while (tempRightArr.length > 1) {
+    while (rightArr.length > 1) {
         // find max value and it lastIndex
-        rightPosition = tempRightArr.lastIndexOf(Math.max(...tempRightArr));
+        rightPosition = rightArr.lastIndexOf(Math.max(...rightArr));
         // copy part of array, from new begin to new max to get sum of difference
-        result = tempRightArr.slice(0, rightPosition).reduce((sum, current) => sum + (tempRightArr[rightPosition] - current), result);
+        result = rightArr.slice(0, rightPosition).reduce((sum, current) => sum + (rightArr[rightPosition] - current), result);
         // remove elements from 0 to max value
-        tempRightArr.splice(0, rightPosition + 1);
+        rightArr.splice(0, rightPosition + 1);
     }
 
     return result
