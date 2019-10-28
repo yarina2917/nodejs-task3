@@ -12,18 +12,18 @@ function calculateWater (arr) {
         // find max value and it index
         leftPosition = leftArr.indexOf(Math.max(...leftArr));
         // copy part of array, from new max to end to get sum of difference
-        result = leftArr.slice(leftPosition + 1).reduce((sum, current) => sum + (leftArr[leftPosition] - current), result);
+        result = leftArr.splice(leftPosition + 1).reduce((sum, current) => sum + (leftArr[leftPosition] - current), result);
         // remove elements from max value to end
-        leftArr.splice(leftPosition);
+        leftArr.pop();
     }
 
     while (rightArr.length > 1) {
         // find max value and it lastIndex
         rightPosition = rightArr.lastIndexOf(Math.max(...rightArr));
         // copy part of array, from begin to new max to get sum of difference
-        result = rightArr.slice(0, rightPosition).reduce((sum, current) => sum + (rightArr[rightPosition] - current), result);
+        result = rightArr.splice(0, rightPosition).reduce((sum, current) => sum + (rightArr[rightPosition] - current), result);
         // remove elements from 0 to max value
-        rightArr.splice(0, rightPosition + 1);
+        rightArr.unshift();
     }
 
     return result
