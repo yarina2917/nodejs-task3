@@ -1,13 +1,10 @@
 function calculateWater (arr) {
     let result = 0;
     let tempMax;
-    let maxValue = Math.max(...arr);
+    let maxValuePosition = arr.indexOf(Math.max(...arr));
 
-    let leftPosition = arr.indexOf(maxValue);
-    let leftArr = arr.slice(0, leftPosition);
-
-    let rightPosition = arr.indexOf(maxValue);
-    let rightArr = arr.slice(rightPosition + 1);
+    let leftArr = arr.slice(0, maxValuePosition);
+    let rightArr = arr.slice(maxValuePosition + 1);
 
     while (leftArr.length > 1) {
         tempMax = Math.max(...leftArr);
