@@ -1,30 +1,33 @@
 function calculateWater (arr) {
-    let leftPosition = 0;
-    let maxLeft = 0;
+    let result = 0;
+    let maxValue = Math.max(...arr);
 
-    let rightPosition = arr.length - 1;
-    let maxRight = 0;
+    let leftPosition = arr.indexOf(maxValue);
+    let tempLeftArr = arr.slice(0, leftPosition);
 
-    let sum = 0;
+    let rightPosition = arr.indexOf(maxValue);
+    let tempRightArr = arr.slice(rightPosition + 1);
 
-    while (leftPosition <= rightPosition) {
-        if (arr[leftPosition] <= arr[rightPosition]) {
-            if (arr[leftPosition] >= maxLeft) {
-                maxLeft = arr[leftPosition];
-            } else {
-                sum += maxLeft - arr[leftPosition]
-            }
-            leftPosition++;
-        } else {
-            if (arr[rightPosition] >= maxRight) {
-                maxRight = arr[rightPosition];
-            } else {
-                sum += maxRight - arr[rightPosition]
-            }
-            rightPosition--
-        }
+
+    while (tempLeftArr.length > 1) {
+        // find max value and it index
+        leftPosition = tempLeftArr.indexOf(Math.max(...tempLeftArr));
+        // copy part of array, from new max to end to get sum of difference
+        result = tempLeftArr.slice(leftPosition + 1).reduce((sum, current) => sum + (tempLeftArr[leftPosition] - current), result);
+        // remove elements from max value to end
+        tempLeftArr.splice(leftPosition);
     }
-    return sum;
+
+    while (tempRightArr.length > 1) {
+        // find max value and it lastIndex
+        rightPosition = tempRightArr.lastIndexOf(Math.max(...tempRightArr));
+        // copy part of array, from new begin to new max to get sum of difference
+        result = tempRightArr.slice(0, rightPosition).reduce((sum, current) => sum + (tempRightArr[rightPosition] - current), result);
+        // remove elements from 0 to max value
+        tempRightArr.splice(0, rightPosition + 1);
+    }
+
+    return result
 }
 
 console.log(calculateWater([2, 5, 1, 3, 1, 2, 1, 7, 7, 6])); // 17
