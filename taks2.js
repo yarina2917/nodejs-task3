@@ -9,7 +9,6 @@ function calculateWater (arr) {
     let rightPosition = arr.indexOf(maxValue);
     let rightArr = arr.slice(rightPosition + 1);
 
-    // debugger
     while (leftArr.length > 1) {
         tempMax = Math.max(...leftArr);
         // splice part of array, from new max to end to get sum of difference
