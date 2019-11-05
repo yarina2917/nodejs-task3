@@ -55,7 +55,7 @@ Array.prototype.mySort = function (compareFunction) {
     let temp;
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length - i - 1; j++) {
-            if (compareFunction ? compareFunction(arr[j], arr[j + 1]) > 0 : arr[j].toString() > arr[j + 1].toString()) {
+            if (compareFunction ? compareFunction(arr[j], arr[j + 1]) > 0 : String(arr[j]) > String(arr[j + 1])) {
                 temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
