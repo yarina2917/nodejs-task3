@@ -20,9 +20,9 @@ timer.timeEnd('myPush', 'wrapper');
 // 1) myForEach
 
 Array.prototype.myForEach = function (callback, thisArg) {
-    let arr = thisArg || this;
+    let arr = this;
     for (let i = 0; i < arr.length; i++) {
-        callback(arr[i], i, arr);
+        callback.call(thisArg, arr[i], i, arr);
     }
 };
 
@@ -36,10 +36,10 @@ timer.timeEnd('myForEach', 'wrapper');
 // 2) myMap
 
 Array.prototype.myMap = function (callback, thisArg) {
-    let arr = thisArg || this;
+    let arr = this;
     let newArr = [];
        for (let i = 0; i < arr.length; i++) {
-        newArr.push(callback(arr[i], i, arr));
+        newArr.push(callback.call(thisArg, arr[i], i, arr));
     }
     return newArr;
 };
@@ -72,10 +72,10 @@ timer.timeEnd('mySort', 'wrapper');
 // 4) myFilter
 
 Array.prototype.myFilter = function (callback, thisArg) {
-    let arr = thisArg || this;
+    let arr = this;
     let newArr = [];
     for (let i = 0; i < arr.length; i++) {
-        if (callback(arr[i], i, arr)) {
+        if (callback.call(thisArg, arr[i], i, arr)) {
             newArr.push(arr[i]);
         }
     }
